@@ -2,12 +2,13 @@
 Loads insurance data to tables then makes it accessible via API.
 See index page for available endpoints.
 
-* Returns the total counts of clients, carriers, and policies loaded into the system
-* Returns a list of all clients and allow paginating through them
-* Returns all policies for a single client
+Endpoints do the following:
+* The total counts of clients, carriers, and policies loaded into the system
+* A list of all clients and allow paginating through them
+* All policies for a single client
 
 ## System Dependencies
-You'll need Ruby 2.6.3 and Rails 6.0.3.3.
+You'll need Ruby 2.6.3, Rails 6.0.3.3 and bundler.
 
 ## Setup
 cd into project directory then
@@ -17,15 +18,14 @@ Create database tables
 * bundle exec rails db:migrate
 
 Load data into tables:
-(Note the order you run these tasks in matter)
+(Note the order you run these tasks matter)
 * bundle exec rails "load_clients"
 * bundle exec rails "load_carriers"
 * bundle exec rails "load_policies"
 
-OR you can run this single command and all tables will be loaded
-
 ### To reset tables
 * bundle exec rails db:migrate VERSION=0
+
 then rerun all setup steps again.
 
 ## Access Endpoints
