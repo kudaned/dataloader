@@ -2,7 +2,7 @@
 Loads insurance data to tables then makes it accessible via API.
 See index page for available endpoints.
 
-Endpoints do the following:
+Endpoints expose the following data:
 * The total counts of clients, carriers, and policies loaded into the system
 * A list of all clients and allow paginating through them
 * All policies for a single client
