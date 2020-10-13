@@ -1,17 +1,6 @@
 require 'csv'
 require_relative './common/base'
 
-def create_new(policy_data)
-  if policy['carrier_id'].blank?
-    new_policy = CarrierOrphan.new(policy_data)
-  elsif policy['client_id'].blank?
-    new_policy = ClientOrphan.new(policy_data)
-  else
-    new_policy = Policy.new(policy_data)
-  end
-  new_policy
-end
-
 desc 'Load Policy table data'
 task :load_policies, [] => [:environment] do |task, args|
 
@@ -24,7 +13,7 @@ task :load_policies, [] => [:environment] do |task, args|
     data.each.with_index(1) do |row, i|
       puts "Processing Policy record #{i} of #{data.size}"
 
-      policy_data = {
+      policy_data = Policy.new({
         policy_type: row['Type'],
         division: row['Division'],
         carrier_id: row['CarrierId'],
@@ -34,13 +23,10 @@ task :load_policies, [] => [:environment] do |task, args|
         written_preminum: row['WrittenPremium'],
         carrier_policy_number: row['CarrierPolicyNumber'],
         expiring: Policy.is_expiring?(row['ExpirationDate'])
-      }
-
-      # Determine if policy has client and carrier data
-      new_policy = create_new(policy_data)
+      })
 
       # Check if record saves overwise exit
-      DataLoadersBase.model_saved?(new_policy)
+      DataLoadersBase.model_saved?(policy_data)
 
       # exit if i == 100
     end

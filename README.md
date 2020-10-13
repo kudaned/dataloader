@@ -18,7 +18,7 @@ Create database tables
 * bundle exec rails db:migrate
 
 Load data into tables:
-(Note the order you run these tasks matter)
+(Note the order you run these tasks matters)
 * bundle exec rails "load_clients"
 * bundle exec rails "load_carriers"
 * bundle exec rails "load_policies"
